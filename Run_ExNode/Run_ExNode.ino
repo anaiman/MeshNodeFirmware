@@ -1,4 +1,5 @@
-
+ ///Select Board Model
+#define NODE_VERSION BETA
 
 #include "SoftwareSerial.h"
 
@@ -39,7 +40,7 @@ int gpsEN = 4;
 ExNode exNode = ExNode();
 
 void setup(){
-  Serial.begin(9600);
+  //Serial.begin(9600);
   
   
   pinMode(gpsEN, OUTPUT);
@@ -66,7 +67,7 @@ void loop(){
   if(currentMillis-previousMillisSlowTimer > slowTimer){
     previousMillisSlowTimer=currentMillis;
     exNode.updateSlow();
-    DebugOut();
+    //DebugOut();
     
     
     

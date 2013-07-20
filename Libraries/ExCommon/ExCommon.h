@@ -7,7 +7,7 @@
 
 
 ///Select Board Model
-#define NODE_VERSION ALPHA
+
 //Node Versions
 #define ALPHA 0
 #define BETA 1
@@ -174,7 +174,8 @@
 
 ///ACCEL
 #define ACCEL_BUFF_SIZE 10
-#define ACCEL_THRESH 16
+#define ACCEL_THRESH 100
+#define TAMPER_WAIT_TIMER 3000
 
 
 
@@ -187,8 +188,12 @@ struct HeartbeatMsg_t {
 	int32_t lon;
 	int32_t alt;
 	int32_t voltage;
-	int32_t trigger;
-	int32_t output;
+	byte trigger_mask;
+	byte triggers;
+	byte trips;
+	byte output_mask;
+	byte outputs;
+	
 };
 
 

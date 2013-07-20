@@ -36,6 +36,9 @@ class ExNode
 		AnalogAccel *_accel;
 		MeshPort *_io_port;
 		MeshPort *_io_port2;
+		MeshPort *_io_port3;
+		MeshPort *_io_port4;
+		MeshPort *_io_port5;
 		void sendHeartbeat();
 		
 		union{

@@ -18,8 +18,12 @@ NodeStatus::NodeStatus(){
 	_accel_y = NULL;
 	_accel_z = NULL;
 	
+	_trigger_mask = 0b10000000;
 	_triggers = 0b0;
+	_trips = 0b0;
 	_digital_mask = 0b0;
+	
+	_output_mask = 0b0;
 	_outputs = 0b0;
 	
 	_forced_output_mask = 0b0;
@@ -112,9 +116,39 @@ byte NodeStatus::getTriggers(){
 }
 void NodeStatus::setTriggersOn(byte t_mask){
 	setTriggers(getTriggers() | t_mask);
+	setTripsOn(t_mask);
 }
 void NodeStatus::setTriggersOff(byte t_mask){
 	setTriggers(getTriggers() & ~t_mask);
+}
+
+void NodeStatus::setTrips(byte trips){
+	_trips = trips;
+}
+byte NodeStatus::getTrips(){
+	return _trips;
+}
+void NodeStatus::setTripsOn(byte t_mask){
+	setTrips(getTrips() | t_mask);
+}
+void NodeStatus::setTripsOff(byte t_mask){
+	setTrips(getTrips() & ~t_mask);
+}
+void NodeStatus::clearTrips(){
+	setTrips(0b0);
+}
+
+void NodeStatus::setTriggerMask(byte t_mask){
+	_trigger_mask = t_mask;
+}
+byte NodeStatus::getTriggerMask(){
+	return _trigger_mask;
+}
+void NodeStatus::addTriggerMask(byte t_mask){
+	setTriggerMask(getTriggerMask() | t_mask);
+}
+void NodeStatus::removeTriggerMask(byte t_mask){
+	setTriggerMask(getTriggerMask() & ~t_mask);
 }
 
 
@@ -148,6 +182,21 @@ void NodeStatus::setOutputsOff(byte o_mask){
 	setOutputs(getOutputs() & ~o_mask);
 }
 
+void NodeStatus::setOutputMask(byte o_mask){
+	_output_mask = o_mask;
+}
+byte NodeStatus::getOutputMask(){
+	return _output_mask;
+}
+void NodeStatus::addOutputMask(byte o_mask){
+	setOutputMask(getOutputMask() | o_mask);
+}
+void NodeStatus::removeOutputMask(byte o_mask){
+	setOutputMask(getOutputMask() & ~o_mask);
+}
+
+
+
 void NodeStatus::setDigitalMask(byte digital_mask){
 	_digital_mask = digital_mask;
 }
@@ -169,20 +218,3 @@ byte NodeStatus::getForcedOutput(){
 	return _forced_output;
 }
 
-int32_t NodeStatus::getOutputsHB(){
-	int32_t  intOutput = 0;
-	if(getOutputs()){
-		intOutput = 1;
-	}
-	return intOutput;
-}
-int32_t NodeStatus::getTriggersHB(){
-	int32_t  intOutput = 0;
-	if(getTriggers()){
-		intOutput = 1;
-	}
-	if(getTamper()){
-		intOutput = 2;
-	}
-	return intOutput;
-}

@@ -54,6 +54,17 @@ class NodeStatus
 		void 	setTriggersOn(byte t_mask);
 		void 	setTriggersOff(byte t_mask);
 		
+		void 	setTrips(byte triggers);
+		byte    getTrips();
+		void 	setTripsOn(byte t_mask);
+		void 	setTripsOff(byte t_mask);
+		void 	clearTrips();
+		
+		void 	setTriggerMask(byte t_mask);
+		byte    getTriggerMask();
+		void 	addTriggerMask(byte t_mask);
+		void 	removeTriggerMask(byte t_mask);
+		
 		void 	setTamperOn(); //MSB of the triggers byte
 		void 	setTamperOff();
 		bool 	getTamper();
@@ -63,6 +74,11 @@ class NodeStatus
 		void 	setOutputsOn(byte o_mask);
 		void 	setOutputsOff(byte o_mask);
 		
+		void 	setOutputMask(byte o_mask);
+		byte    getOutputMask();
+		void 	addOutputMask(byte o_mask);
+		void 	removeOutputMask(byte o_mask);
+		
 		void 	setDigitalMask(byte digital_mask);
 		byte 	getDigitalMask();
 		
@@ -71,10 +87,7 @@ class NodeStatus
 		
 		void	setForcedOutput(byte forced_output_mask);
 		byte	getForcedOutput();
-		
-		int32_t 	getOutputsHB();
-		int32_t 	getTriggersHB();
-		
+
 		
 		
 		
@@ -91,8 +104,12 @@ class NodeStatus
 		int32_t 	_accel_y;
 		int32_t 	_accel_z;
 		
+		byte		_trigger_mask;
 		byte 	 	_triggers;
-		byte		_digital_mask; //1 means triggered when high
+		byte		_trips;
+		byte		_digital_mask; //Defines when a DIO pin is triggered: 1 means triggered when input is HIGH
+		
+		byte 	 	_output_mask;
 		byte 	 	_outputs;
 		
 		byte		_forced_output_mask; 	//Which outputs are being forced 0=Auto, 1=Forced

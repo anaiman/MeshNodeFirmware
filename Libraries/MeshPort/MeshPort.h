@@ -14,6 +14,7 @@ class MeshPort
 		virtual void 	updateInputs(NodeStatus *nstat){};
 		virtual void 	updateOutputs(NodeStatus *nstat){};
 		byte			getTriggerMask();
+		byte			getOutputMask();
 		
 		void			setOutputTimerByte(byte otimer);
 		void			setOutputTimerLong(unsigned long otimer);
@@ -31,7 +32,7 @@ class MeshPort
 		void			setTriggerMask(byte b);
 		
 		void			setOutputMask(byte b);
-		byte			getOutputMask();
+		
 		
 		
 		void 			setLocalAutoIoMap(byte b);

@@ -36,6 +36,7 @@ void AnalogAccel::update(NodeStatus *nstat){
 	 for(int n = 0 ; n < 3; n++){
 		_accel_sample = analogRead(_analog_pin[n]);
 		_accel_diff = _accel_avg[n]-_accel_sample;
+		//Serial.println(_accel_diff*_accel_diff);
 		
 		if ( _accel_diff*_accel_diff > ACCEL_THRESH){
 		  _tamper = true;
@@ -70,7 +71,10 @@ void AnalogAccel::update(NodeStatus *nstat){
 	  
 	if(_tamper){
 		//Serial.println("Tamper");
-		nstat->setTamperOn();
+		if(nstat->ntime->getSystemTime()>TAMPER_WAIT_TIMER){
+			nstat->setTamperOn();
+		}
+		
 	}
 	else{
 		nstat->setTamperOff();
