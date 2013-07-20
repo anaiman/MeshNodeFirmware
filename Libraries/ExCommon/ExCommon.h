@@ -7,7 +7,7 @@
 
 
 ///Select Board Model
-
+#define NODE_VERSION BETA
 //Node Versions
 #define ALPHA 0
 #define BETA 1
