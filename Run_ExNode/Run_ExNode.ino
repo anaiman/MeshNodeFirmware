@@ -1,5 +1,5 @@
  ///Select Board Model
-#define NODE_VERSION BETA
+//#define NODE_VERSION BETA
 
 #include "SoftwareSerial.h"
 
